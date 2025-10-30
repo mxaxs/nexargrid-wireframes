@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>NexarGrid Mobile - Wireframes MVP</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      padding: 20px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    
+    .header h1 {
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    
+    .header p {
+      font-size: clamp(14px, 3vw, 18px);
+      color: var(--text-secondary);
+    }
+    
+    .screens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    
+    .screen-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border: 1px solid var(--glass-border);
+      min-height: 120px;
+    }
+    
+    .screen-card:active {
+      transform: scale(0.98);
+    }
+    
+    @media (hover: hover) {
+      .screen-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        background: rgba(255, 255, 255, 0.8);
+      }
+    }
+    
+    .screen-number {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 32px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    
+    .screen-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    
+    .screen-description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    
+    .info-section {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 24px;
+      border: 1px solid var(--glass-border);
+    }
+    
+    .info-section h2 {
+      font-size: clamp(20px, 4vw, 24px);
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    
+    .info-section p {
+      font-size: clamp(14px, 3vw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: start;
+      gap: 12px;
+    }
+    
+    .feature-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    
+    .feature-text {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+      
+      .header {
+        margin-bottom: 24px;
+      }
+      
+      .screens-grid {
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      
+      .screen-card {
+        padding: 16px;
+        min-height: 100px;
+      }
+      
+      .info-section {
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      
+      .features-list {
+        gap: 12px;
+      }
+    }
+    
+    /* Very small screens */
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      
+      .screen-card {
+        padding: 14px;
+      }
+      
+      .info-section {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📱 NexarGrid Mobile</h1>
+      <p>Wireframes Interativos - MVP</p>
+    </div>
+
+    <div class="info-section">
+      <h2>Sobre o Projeto</h2>
+      <p>
+        O <strong>NexarGrid Mobile</strong> é um aplicativo companion para profissionais de saúde, 
+        permitindo a gestão de escalas médicas, anúncio e captura de plantões, check-in/check-out, 
+        e acompanhamento financeiro.
+      </p>
+      <p>
+        Estes wireframes representam as <strong>12 telas principais do MVP</strong>, criadas para 
+        validação de fluxos e experiência do usuário antes da implementação em Flutter.
+      </p>
+    </div>
+
+    <div class="info-section">
+      <h2>✨ Features do MVP</h2>
+      <div class="features-list">
+        <div class="feature-item">
+          <div class="feature-icon">🔐</div>
+          <div class="feature-text">
+            <div class="feature-title">Autenticação</div>
+            <div class="feature-desc">Login seguro com email e senha</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div class="feature-text">
+            <div class="feature-title">Dashboard</div>
+            <div class="feature-desc">Visão geral de plantões e estatísticas</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📅</div>
+          <div class="feature-text">
+            <div class="feature-title">Escalas</div>
+            <div class="feature-desc">Lista e calendário de plantões</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔄</div>
+          <div class="feature-text">
+            <div class="feature-title">Marketplace</div>
+            <div class="feature-desc">Plantões disponíveis para captura</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📢</div>
+          <div class="feature-text">
+            <div class="feature-title">Anunciar</div>
+            <div class="feature-desc">Disponibilizar plantões</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">👤</div>
+          <div class="feature-text">
+            <div class="feature-title">Perfil</div>
+            <div class="feature-desc">Dados pessoais e especialidades</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📋</div>
+          <div class="feature-text">
+            <div class="feature-title">Documentos</div>
+            <div class="feature-desc">Gestão de documentos profissionais</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💰</div>
+          <div class="feature-text">
+            <div class="feature-title">Financeiro</div>
+            <div class="feature-desc">Extrato e pagamentos</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📍</div>
+          <div class="feature-text">
+            <div class="feature-title">Check-in</div>
+            <div class="feature-desc">Registro de presença com GPS</div>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔔</div>
+          <div class="feature-text">
+            <div class="feature-title">Notificações</div>
+            <div class="feature-desc">Alertas e lembretes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>🎨 Telas do MVP</h2>
+      <p>Toque em qualquer tela abaixo para visualizar o wireframe interativo:</p>
+    </div>
+
+    <div class="screens-grid">
+      <a href="screens/01-login.html" class="screen-card">
+        <div class="screen-number">1</div>
+        <div class="screen-title">Login</div>
+        <div class="screen-description">
+          Autenticação com email e senha
+        </div>
+      </a>
+
+      <a href="screens/02-dashboard.html" class="screen-card">
+        <div class="screen-number">2</div>
+        <div class="screen-title">Dashboard</div>
+        <div class="screen-description">
+          Visão geral com próximo plantão
+        </div>
+      </a>
+
+      <a href="screens/03-schedule-list.html" class="screen-card">
+        <div class="screen-number">3</div>
+        <div class="screen-title">Lista de Escalas</div>
+        <div class="screen-description">
+          Lista cronológica de plantões
+        </div>
+      </a>
+
+      <a href="screens/04-schedule-calendar.html" class="screen-card">
+        <div class="screen-number">4</div>
+        <div class="screen-title">Calendário</div>
+        <div class="screen-description">
+          Visualização mensal de plantões
+        </div>
+      </a>
+
+      <a href="screens/05-schedule-detail.html" class="screen-card">
+        <div class="screen-number">5</div>
+        <div class="screen-title">Detalhes do Plantão</div>
+        <div class="screen-description">
+          Informações completas do plantão
+        </div>
+      </a>
+
+      <a href="screens/06-marketplace.html" class="screen-card">
+        <div class="screen-number">6</div>
+        <div class="screen-title">Marketplace</div>
+        <div class="screen-description">
+          Plantões disponíveis para captura
+        </div>
+      </a>
+
+      <a href="screens/07-announce-shift.html" class="screen-card">
+        <div class="screen-number">7</div>
+        <div class="screen-title">Anunciar Plantão</div>
+        <div class="screen-description">
+          Disponibilizar plantões
+        </div>
+      </a>
+
+      <a href="screens/08-profile.html" class="screen-card">
+        <div class="screen-number">8</div>
+        <div class="screen-title">Perfil</div>
+        <div class="screen-description">
+          Dados pessoais e especialidades
+        </div>
+      </a>
+
+      <a href="screens/09-documents.html" class="screen-card">
+        <div class="screen-number">9</div>
+        <div class="screen-title">Documentos</div>
+        <div class="screen-description">
+          Lista de documentos com status
+        </div>
+      </a>
+
+      <a href="screens/10-financial.html" class="screen-card">
+        <div class="screen-number">10</div>
+        <div class="screen-title">Extrato Financeiro</div>
+        <div class="screen-description">
+          Compensações e pagamentos
+        </div>
+      </a>
+
+      <a href="screens/11-checkin.html" class="screen-card">
+        <div class="screen-number">11</div>
+        <div class="screen-title">Check-in</div>
+        <div class="screen-description">
+          Registro de presença com GPS
+        </div>
+      </a>
+
+      <a href="screens/12-notifications.html" class="screen-card">
+        <div class="screen-number">12</div>
+        <div class="screen-title">Notificações</div>
+        <div class="screen-description">
+          Lista de notificações
+        </div>
+      </a>
+    </div>
+
+    <div class="info-section">
+      <h2>🚀 Stack Técnico</h2>
+      <p><strong>Frontend:</strong> Flutter + MobX + GoRouter + GetIt</p>
+      <p><strong>Backend:</strong> SurrealDB com LiveQueries</p>
+      <p><strong>Cache Local:</strong> ObjectBox</p>
+      <p><strong>Arquitetura:</strong> Cache-First + LiveSync + Offline-First</p>
+    </div>
+
+    <div class="info-section" style="text-align: center;">
+      <p style="font-size: 13px; color: var(--text-secondary);">
+        NexarGrid Mobile • Wireframes MVP • 2025
+      </p>
+    </div>
+  </div>
+</body>
+</html>

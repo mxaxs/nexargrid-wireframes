@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendário - NexarGrid Mobile (iOS 18) (iOS 18)</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/icons.css">
+</head>
+<body>
+  <!-- Hamburger Menu Button (Mobile) -->
+  <div class="hamburger-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-overlay" onclick="toggleMenu()"></div>
+  <div class="mobile-frame">
+    <div class="status-bar">
+      <div class="status-bar-left"><span>9:41</span></div>
+      <div class="status-bar-right"><span>📶</span><span>📡</span><span>🔋</span></div>
+    </div>
+    <div class="app-bar">
+      <div class="app-bar-action">
+        <span class="icon"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      </div>
+      <div style="flex: 1;"></div>
+      <div class="app-bar-action">
+        <span class="icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+      </div>
+    </div>
+    <div class="content">
+      <div style="font-size: 15px; color: var(--text-secondary); margin-bottom: 8px;">Escalas do Mês</div>
+      <div class="heading" style="margin-bottom: 24px;">Novembro 2025</div>
+      <div class="calendar">
+        <div class="calendar-header">
+          <div class="app-bar-action" style="background: transparent; border: none;">
+            <span class="icon"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="calendar-month" style="font-size: 15px;">Novembro</div>
+            <div style="font-size: 13px; color: var(--text-secondary);">▼</div>
+          </div>
+          <div class="app-bar-action" style="background: transparent; border: none;">
+            <span class="icon"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+          </div>
+        </div>
+        <div class="calendar-grid">
+          <div class="calendar-day-header">D</div><div class="calendar-day-header">S</div><div class="calendar-day-header">T</div><div class="calendar-day-header">Q</div><div class="calendar-day-header">Q</div><div class="calendar-day-header">S</div><div class="calendar-day-header">S</div>
+          <div class="calendar-day inactive"></div><div class="calendar-day inactive"></div><div class="calendar-day inactive"></div><div class="calendar-day inactive"></div><div class="calendar-day inactive"></div><div class="calendar-day">1</div><div class="calendar-day">2</div>
+          <div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day has-shift">6</div><div class="calendar-day">7</div><div class="calendar-day has-shift">8</div><div class="calendar-day has-shift">9</div>
+          <div class="calendar-day has-shift">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day today">14</div><div class="calendar-day has-shift">15</div><div class="calendar-day">16</div>
+          <div class="calendar-day">17</div><div class="calendar-day has-shift">18</div><div class="calendar-day">19</div><div class="calendar-day has-shift">20</div><div class="calendar-day">21</div><div class="calendar-day has-shift">22</div><div class="calendar-day">23</div>
+          <div class="calendar-day has-shift">24</div><div class="calendar-day has-shift">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div><div class="calendar-day has-shift">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div>
+        </div>
+      </div>
+      <div class="section-header"><div class="section-title">Próximo Plantão</div></div>
+      <div class="shift-card">
+        <div class="shift-card-header">
+          <div>
+            <div class="shift-card-title">Amanhã, 15 Nov</div>
+            <div class="shift-card-subtitle">
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin-right: 4px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              07:00 - 19:00 •
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin: 0 4px;"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              Hospital Central
+            </div>
+          </div>
+          <span class="badge badge-success">Confirmado</span>
+        </div>
+        <div class="shift-card-meta">
+          <div class="avatar-group">
+            <div class="avatar avatar-colored">MC</div><div class="avatar avatar-colored">AP</div><div class="avatar avatar-colored">RF</div><div class="avatar avatar-colored">LM</div><div class="avatar">+2</div>
+          </div>
+        </div>
+      </div>
+      <div class="section-header"><div class="section-title">Próximos Plantões</div></div>
+      <div class="shift-card">
+        <div class="shift-card-header">
+          <div>
+            <div class="shift-card-title">18 Nov - Domingo</div>
+            <div class="shift-card-subtitle">
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin-right: 4px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              19:00 - 07:00 •
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin: 0 4px;"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              Hospital Sul
+            </div>
+          </div>
+          <span class="badge badge-warning">Pendente</span>
+        </div>
+        <div class="shift-card-meta">
+          <div class="avatar-group"><div class="avatar avatar-colored">LM</div><div class="avatar avatar-colored">CS</div><div class="avatar">+3</div></div>
+        </div>
+      </div>
+      <div class="shift-card">
+        <div class="shift-card-header">
+          <div>
+            <div class="shift-card-title">20 Nov - Terça</div>
+            <div class="shift-card-subtitle">
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin-right: 4px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              07:00 - 13:00 •
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin: 0 4px;"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              Clínica Norte
+            </div>
+          </div>
+          <span class="badge badge-info">Anunciado</span>
+        </div>
+      </div>
+      <div class="section-header"><div class="section-title">Plantões Passados</div></div>
+      <div class="shift-card">
+        <div class="shift-card-header">
+          <div>
+            <div class="shift-card-title">10 Nov - Sexta</div>
+            <div class="shift-card-subtitle">
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin-right: 4px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              07:00 - 19:00 •
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin: 0 4px;"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              Hospital Central
+            </div>
+          </div>
+          <div style="text-align: right;"><div style="font-size: 17px; font-weight: 700; color: var(--primary);">R$ 1.800</div></div>
+        </div>
+        <span class="badge badge-success">Concluído</span>
+      </div>
+      <div class="shift-card">
+        <div class="shift-card-header">
+          <div>
+            <div class="shift-card-title">8 Nov - Quarta</div>
+            <div class="shift-card-subtitle">
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin-right: 4px;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              13:00 - 19:00 •
+              <span class="icon icon-sm icon-secondary" style="vertical-align: middle; margin: 0 4px;"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              Hospital Sul
+            </div>
+          </div>
+          <div style="text-align: right;"><div style="font-size: 17px; font-weight: 700; color: var(--primary);">R$ 1.200</div></div>
+        </div>
+        <span class="badge badge-success">Concluído</span>
+      </div>
+      <div style="height: 100px;"></div>
+    </div>
+    <div class="fab"><span class="icon icon-xl" style="color: white;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></span></div>
+    <div class="bottom-nav">
+      <div class="bottom-nav-item"><div class="bottom-nav-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span></div><div class="bottom-nav-label">Início</div></div>
+      <div class="bottom-nav-item active"><div class="bottom-nav-icon"><span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span></div><div class="bottom-nav-label">Escalas</div></div>
+      <div class="bottom-nav-item" style="opacity: 0;"><div class="bottom-nav-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></span></div></div>
+      <div class="bottom-nav-item"><div class="bottom-nav-icon"><span class="icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></span></div><div class="bottom-nav-label">Notificações</div></div>
+      <div class="bottom-nav-item"><div class="bottom-nav-icon"><span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></span></div><div class="bottom-nav-label">Perfil</div></div>
+    </div>
+  </div>
+  <div class="nav-container">
+    <div class="nav-title">📱 Wireframes MVP</div>
+    <a href="01-login.html" class="nav-link">1. Login</a>
+    <a href="02-dashboard.html" class="nav-link">2. Dashboard</a>
+    <a href="03-schedule-list.html" class="nav-link">3. Lista de Escalas</a>
+    <a href="04-schedule-calendar.html" class="nav-link active">4. Calendário</a>
+    <a href="05-schedule-detail.html" class="nav-link">5. Detalhes do Plantão</a>
+    <a href="06-marketplace.html" class="nav-link">6. Marketplace</a>
+    <a href="07-announce-shift.html" class="nav-link">7. Anunciar Plantão</a>
+    <a href="08-profile.html" class="nav-link">8. Perfil</a>
+    <a href="09-documents.html" class="nav-link">9. Documentos</a>
+    <a href="10-financial.html" class="nav-link">10. Extrato Financeiro</a>
+    <a href="11-checkin.html" class="nav-link">11. Check-in</a>
+    <a href="12-notifications.html" class="nav-link">12. Notificações</a>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-container").classList.toggle("open");
+      document.querySelector(".hamburger-btn").classList.toggle("open");
+      document.querySelector(".nav-overlay").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>

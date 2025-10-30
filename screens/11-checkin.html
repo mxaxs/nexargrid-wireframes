@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check-in - NexarGrid Mobile (iOS 18) (iOS 18)</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/icons.css">
+  <style>
+    .map-container {
+      position: absolute;
+      top: 54px;
+      left: 0;
+      right: 0;
+      bottom: 80px;
+      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 50%, #80CBC4 100%);
+      overflow: hidden;
+    }
+    
+    .map-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, transparent 1px, transparent 20px, rgba(0,0,0,0.03) 21px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0px, transparent 1px, transparent 20px, rgba(0,0,0,0.03) 21px);
+    }
+    
+    .map-marker {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      border-radius: 50% 50% 50% 0;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      box-shadow: 0 4px 12px rgba(0, 122, 255, 0.4);
+      animation: pulse 2s infinite;
+    }
+    
+    .map-marker::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
+      50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.1); }
+    }
+    
+    .checkin-panel {
+      position: absolute;
+      bottom: 100px;
+      left: 16px;
+      right: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--glass-border);
+    }
+    
+    .checkin-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .checkin-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .checkin-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .checkin-info {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .checkin-info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .checkin-info-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(0, 122, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+    
+    .checkin-info-text {
+      flex: 1;
+    }
+    
+    .checkin-info-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+    
+    .checkin-info-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .checkin-status {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .checkin-status-icon {
+      color: var(--success);
+    }
+    
+    .checkin-status-text {
+      flex: 1;
+      font-size: 13px;
+      color: var(--success);
+      font-weight: 600;
+    }
+    
+    .checkin-button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+      transition: all 0.2s;
+    }
+    
+    .checkin-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+    }
+    
+    .location-badge {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hamburger Menu Button (Mobile) -->
+  <div class="hamburger-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-overlay" onclick="toggleMenu()"></div>
+  <div class="mobile-frame">
+    <div class="status-bar">
+      <div class="status-bar-left"><span>9:41</span></div>
+      <div class="status-bar-right"><span>📶</span><span>📡</span><span>🔋</span></div>
+    </div>
+    
+    <div class="app-bar" style="background: transparent; position: absolute; top: 54px; left: 0; right: 0; z-index: 10;">
+      <div class="app-bar-action">
+        <span class="icon"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      </div>
+      <div style="flex: 1;"></div>
+      <div class="app-bar-action">
+        <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>
+      </div>
+    </div>
+    
+    <!-- Map Background -->
+    <div class="map-container">
+      <div class="map-pattern"></div>
+      <div class="map-marker"></div>
+      
+      <!-- Location Badge -->
+      <div class="location-badge">
+        <span class="icon" style="color: var(--primary);">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </span>
+        <span>Hospital Central</span>
+      </div>
+      
+      <!-- Check-in Panel -->
+      <div class="checkin-panel">
+        <div class="checkin-header">
+          <div class="checkin-title">Plantão de Hoje</div>
+          <div class="checkin-subtitle">15 de Novembro, 2025</div>
+        </div>
+        
+        <div class="checkin-info">
+          <div class="checkin-info-row">
+            <div class="checkin-info-icon">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </span>
+            </div>
+            <div class="checkin-info-text">
+              <div class="checkin-info-label">Horário</div>
+              <div class="checkin-info-value">07:00 - 19:00 (12h)</div>
+            </div>
+          </div>
+          
+          <div class="checkin-info-row">
+            <div class="checkin-info-icon">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </span>
+            </div>
+            <div class="checkin-info-text">
+              <div class="checkin-info-label">Local</div>
+              <div class="checkin-info-value">Hospital Central - Emergência</div>
+            </div>
+          </div>
+          
+          <div class="checkin-info-row">
+            <div class="checkin-info-icon">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </span>
+            </div>
+            <div class="checkin-info-text">
+              <div class="checkin-info-label">Horário Atual</div>
+              <div class="checkin-info-value" style="color: var(--primary); font-size: 18px;">06:55</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="checkin-status">
+          <span class="checkin-status-icon icon">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
+          <span class="checkin-status-text">Você está próximo ao local do plantão</span>
+        </div>
+        
+        <button class="checkin-button">
+          <span style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </span>
+            <span>Confirmar Check-in</span>
+          </span>
+        </button>
+      </div>
+    </div>
+    
+    <div class="fab">
+      <span class="icon icon-xl" style="color: white;">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+      </span>
+    </div>
+    
+    <div class="bottom-nav">
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        </div>
+        <div class="bottom-nav-label">Início</div>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        </div>
+        <div class="bottom-nav-label">Escalas</div>
+      </div>
+      <div class="bottom-nav-item" style="opacity: 0;">
+        <div class="bottom-nav-icon">
+          <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></span>
+        </div>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <span class="icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+        </div>
+        <div class="bottom-nav-label">Notificações</div>
+      </div>
+      <div class="bottom-nav-item active">
+        <div class="bottom-nav-icon">
+          <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></span>
+        </div>
+        <div class="bottom-nav-label">Perfil</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="nav-container">
+    <div class="nav-title">📱 Wireframes MVP</div>
+    <a href="01-login.html" class="nav-link">1. Login</a>
+    <a href="02-dashboard.html" class="nav-link">2. Dashboard</a>
+    <a href="03-schedule-list.html" class="nav-link">3. Lista de Escalas</a>
+    <a href="04-schedule-calendar.html" class="nav-link">4. Calendário</a>
+    <a href="05-schedule-detail.html" class="nav-link">5. Detalhes do Plantão</a>
+    <a href="06-marketplace.html" class="nav-link">6. Marketplace</a>
+    <a href="07-announce-shift.html" class="nav-link">7. Anunciar Plantão</a>
+    <a href="08-profile.html" class="nav-link">8. Perfil</a>
+    <a href="09-documents.html" class="nav-link">9. Documentos</a>
+    <a href="10-financial.html" class="nav-link">10. Extrato Financeiro</a>
+    <a href="11-checkin.html" class="nav-link active">11. Check-in</a>
+    <a href="12-notifications.html" class="nav-link">12. Notificações</a>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-container").classList.toggle("open");
+      document.querySelector(".hamburger-btn").classList.toggle("open");
+      document.querySelector(".nav-overlay").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>

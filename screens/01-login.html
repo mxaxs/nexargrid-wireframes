@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - NexarGrid Mobile (iOS 18) (iOS 18)</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/icons.css">
+  <style>
+    .login-container {
+      position: absolute;
+      top: 54px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #E0F2F1 0%, #B2DFDB 50%, #80CBC4 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    
+    .login-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, transparent 1px, transparent 20px, rgba(0,0,0,0.03) 21px),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.03) 0px, transparent 1px, transparent 20px, rgba(0,0,0,0.03) 21px);
+    }
+    
+    .login-logo {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .login-logo-icon {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    .login-logo-text {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .login-logo-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+    
+    .login-panel {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 400px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--glass-border);
+    }
+    
+    .login-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    
+    .login-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .login-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .login-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .login-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 122, 255, 0.2);
+      border-radius: 12px;
+      font-size: 15px;
+      color: var(--text-primary);
+      transition: all 0.2s;
+      box-sizing: border-box;
+    }
+    
+    .login-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    }
+    
+    .login-input::placeholder {
+      color: var(--text-tertiary);
+    }
+    
+    .login-forgot {
+      text-align: right;
+      margin-top: -8px;
+    }
+    
+    .login-forgot-link {
+      font-size: 13px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .login-button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+      transition: all 0.2s;
+      margin-top: 8px;
+    }
+    
+    .login-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+    }
+    
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    
+    .login-divider-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .login-divider-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .login-biometric {
+      width: 100%;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    
+    .login-biometric:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: var(--primary);
+    }
+    
+    .login-footer {
+      position: relative;
+      z-index: 2;
+      margin-top: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .login-footer-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <!-- Hamburger Menu Button (Mobile) -->
+  <div class="hamburger-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-overlay" onclick="toggleMenu()"></div>
+  <div class="mobile-frame">
+    <div class="status-bar">
+      <div class="status-bar-left"><span>9:41</span></div>
+      <div class="status-bar-right"><span>📶</span><span>📡</span><span>🔋</span></div>
+    </div>
+    
+    <!-- Login Container with Map Background -->
+    <div class="login-container">
+      <div class="login-pattern"></div>
+      
+      <!-- Logo -->
+      <div class="login-logo">
+        <div class="login-logo-icon">
+          <span class="icon" style="color: var(--primary); width: 48px; height: 48px;">
+            <svg viewBox="0 0 24 24" width="48" height="48">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+        </div>
+        <div class="login-logo-text">NexarGrid</div>
+        <div class="login-logo-subtitle">Gestão de Plantões Médicos</div>
+      </div>
+      
+      <!-- Login Panel -->
+      <div class="login-panel">
+        <div class="login-title">Bem-vindo!</div>
+        <div class="login-subtitle">Faça login para continuar</div>
+        
+        <form class="login-form">
+          <div class="login-input-group">
+            <label class="login-label">Email</label>
+            <input 
+              type="email" 
+              class="login-input" 
+              placeholder="seu.email@hospital.com"
+              value=""
+            />
+          </div>
+          
+          <div class="login-input-group">
+            <label class="login-label">Senha</label>
+            <input 
+              type="password" 
+              class="login-input" 
+              placeholder="••••••••"
+              value=""
+            />
+          </div>
+          
+          <div class="login-forgot">
+            <a href="#" class="login-forgot-link">Esqueceu a senha?</a>
+          </div>
+          
+          <button type="submit" class="login-button">
+            Entrar
+          </button>
+        </form>
+        
+        <div class="login-divider">
+          <div class="login-divider-line"></div>
+          <div class="login-divider-text">ou</div>
+          <div class="login-divider-line"></div>
+        </div>
+        
+        <button class="login-biometric">
+          <span class="icon" style="color: var(--primary);">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M12 1a11 11 0 0 0-11 11v7a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1H4a9 9 0 0 1 18 0h-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h1a3 3 0 0 0 3-3v-7a11 11 0 0 0-11-11z"/>
+            </svg>
+          </span>
+          <span>Entrar com Biometria</span>
+        </button>
+      </div>
+      
+      <!-- Footer -->
+      <div class="login-footer">
+        Não tem uma conta? <a href="#" class="login-footer-link">Cadastre-se</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="nav-container">
+    <div class="nav-title">📱 Wireframes MVP</div>
+    <a href="01-login.html" class="nav-link active">1. Login</a>
+    <a href="02-dashboard.html" class="nav-link">2. Dashboard</a>
+    <a href="03-schedule-list.html" class="nav-link">3. Lista de Escalas</a>
+    <a href="04-schedule-calendar.html" class="nav-link">4. Calendário</a>
+    <a href="05-schedule-detail.html" class="nav-link">5. Detalhes do Plantão</a>
+    <a href="06-marketplace.html" class="nav-link">6. Marketplace</a>
+    <a href="07-announce-shift.html" class="nav-link">7. Anunciar Plantão</a>
+    <a href="08-profile.html" class="nav-link">8. Perfil</a>
+    <a href="09-documents.html" class="nav-link">9. Documentos</a>
+    <a href="10-financial.html" class="nav-link">10. Extrato Financeiro</a>
+    <a href="11-checkin.html" class="nav-link">11. Check-in</a>
+    <a href="12-notifications.html" class="nav-link">12. Notificações</a>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.querySelector(".nav-container").classList.toggle("open");
+      document.querySelector(".hamburger-btn").classList.toggle("open");
+      document.querySelector(".nav-overlay").classList.toggle("open");
+    }
+  </script>
+</body>
+</html>
