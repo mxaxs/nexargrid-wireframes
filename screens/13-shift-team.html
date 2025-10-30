@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe de Plantão - NexarGrid Mobile (iOS 18)</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/icons.css">
+  <style>
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 18px;
+      color: white;
+      flex-shrink: 0;
+    }
+    
+    .avatar-group {
+      display: flex;
+      margin-left: -8px;
+    }
+    
+    .avatar-group .avatar {
+      margin-left: -8px;
+      border: 2px solid var(--surface);
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
+    }
+    
+    .team-member {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      margin-bottom: 12px;
+    }
+    
+    .team-member-info {
+      flex: 1;
+    }
+    
+    .team-member-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .team-member-specialty {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .status-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .status-online {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+    }
+    
+    .status-offline {
+      background: rgba(107, 114, 128, 0.1);
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hamburger Menu Button (Mobile) -->
+  <div class="hamburger-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-overlay" onclick="toggleMenu()"></div>
+  <div class="mobile-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <div class="status-bar-left">
+        <span>9:41</span>
+      </div>
+      <div class="status-bar-right">
+        <span>📶</span>
+        <span>📡</span>
+        <span>🔋</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <div class="app-bar-back" onclick="window.location.href='05-shift-details.html'">
+        <span class="icon"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></span>
+      </div>
+      <div class="app-bar-title">Equipe de Plantão</div>
+      <div class="app-bar-action"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <!-- Shift Info Card -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">
+              Hospital Central
+            </div>
+            <div style="font-size: 14px; color: var(--text-secondary);">
+              15 Nov • 07:00 - 19:00
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 4px;">
+              Equipe
+            </div>
+            <div style="font-size: 20px; font-weight: 600; color: var(--primary);">
+              6 médicos
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Members List -->
+      <div style="margin-bottom: 16px;">
+        <div style="font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; padding: 0 4px;">
+          Membros da Equipe
+        </div>
+
+        <!-- Member 1 - You -->
+        <div class="team-member">
+          <div class="avatar" style="background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);">
+            VC
+          </div>
+          <div class="team-member-info">
+            <div class="team-member-name">Você</div>
+            <div class="team-member-specialty">Cardiologia</div>
+          </div>
+          <div class="status-badge status-online">
+            Online
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="team-member">
+          <div class="avatar" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+            AS
+          </div>
+          <div class="team-member-info">
+            <div class="team-member-name">Dr. André Silva</div>
+            <div class="team-member-specialty">Clínico Geral</div>
+          </div>
+          <div class="status-badge status-online">
+            Online
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="team-member">
+          <div class="avatar" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);">
+            MC
+          </div>
+          <div class="team-member-info">
+            <div class="team-member-name">Dra. Maria Costa</div>
+            <div class="team-member-specialty">Pediatria</div>
+          </div>
+          <div class="status-badge status-online">
+            Online
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="team-member">
+          <div class="avatar" style="background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);">
+            PO
+          </div>
+          <div class="team-member-info">
+            <div class="team-member-name">Dr. Paulo Oliveira</div>
+            <div class="team-member-specialty">Ortopedia</div>
+          </div>
+          <div class="status-badge status-offline">
+            Offline
+          </div>
+        </div>
+
+        <!-- Member 5 -->
+        <div class="team-member">
+          <div class="avatar" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
+            JM
+          </div>
+          <div class="team-member-info">
+            <div class="team-member-name">Dra. Juliana Martins</div>
+            <div class="team-member-specialty">Neurologia</div>
+          </div>
+          <div class="status-badge status-online">
+            Online
+          </div>
+        </div>
+
+        <!-- Member 6 -->
+        <div class="team-member">
+          <div class="avatar" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);">
+            RF
+          </div>
+          <div class="team-member-info">
+            <div class="team-member-name">Dr. Ricardo Ferreira</div>
+            <div class="team-member-specialty">Anestesiologia</div>
+          </div>
+          <div class="status-badge status-online">
+            Online
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Box -->
+      <div style="background: rgba(0, 122, 255, 0.08); border-radius: 16px; padding: 16px; margin-top: 16px;">
+        <div style="display: flex; gap: 12px; align-items: start;">
+          <div style="font-size: 20px;">ℹ️</div>
+          <div style="flex: 1;">
+            <div style="font-size: 14px; color: var(--text-primary); line-height: 1.5;">
+              Você pode entrar em contato com os membros da equipe através do chat interno ou visualizar seus perfis profissionais.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+      <div class="nav-item" onclick="window.location.href='02-dashboard.html'">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+        <span>Início</span>
+      </div>
+      <div class="nav-item active" onclick="window.location.href='03-schedule-list.html'">
+        <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        <span>Agenda</span>
+      </div>
+      <div class="nav-item" onclick="window.location.href='06-marketplace.html'">
+        <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+        <span>Market</span>
+      </div>
+      <div class="nav-item" onclick="window.location.href='12-notifications.html'">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+        <span>Notificações</span>
+      </div>
+      <div class="nav-item" onclick="window.location.href='08-profile.html'">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <span>Perfil</span>
+      </div>
+    </div>
+
+    <!-- FAB -->
+    <div class="fab" onclick="window.location.href='11-checkin.html'">
+      <span class="icon icon-lg"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+    </div>
+  </div>
+
+  <!-- Side Menu -->
+  <div class="side-menu">
+    <div class="side-menu-header">
+      <div style="font-size: 24px; font-weight: 700; color: var(--primary);">NexarGrid</div>
+      <div style="font-size: 14px; color: var(--text-secondary); margin-top: 4px;">Mobile iOS 18</div>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='01-login.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg></span>
+      <span>Login</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='02-dashboard.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+      <span>Dashboard</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='03-schedule-list.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></span>
+      <span>Lista de Escalas</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='04-schedule-calendar.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+      <span>Calendário</span>
+    </div>
+    <div class="side-menu-item active" onclick="window.location.href='05-shift-details.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+      <span>Detalhes do Plantão</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='06-marketplace.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+      <span>Marketplace</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='07-post-shift.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+      <span>Anunciar Plantão</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='08-profile.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+      <span>Perfil</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='09-documents.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></span>
+      <span>Documentos</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='10-financial.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+      <span>Extrato Financeiro</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='11-checkin.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <span>Check-in</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='12-notifications.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+      <span>Notificações</span>
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='13-shift-team.html'">
+      <span class="icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+      <span>Equipe de Plantão</span>
+    </div>
+  </div>
+
+  <script src="../js/navigation.js"></script>
+</body>
+</html>
