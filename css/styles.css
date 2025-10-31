@@ -780,11 +780,15 @@ body {
     top: 0;
     left: -280px;
     height: 100vh;
+    max-height: 100vh;
     width: 280px;
     max-width: 80vw;
     transition: left 0.3s ease;
     overflow-y: auto;
-    padding: 60px 20px 20px 20px;
+    overflow-x: hidden;
+    padding: 60px 20px 80px 20px;
+    display: flex;
+    flex-direction: column;
   }
   
   .nav-container.open {
