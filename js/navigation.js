@@ -21,12 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Make cards clickable
-  const cards = document.querySelectorAll('.card, .shift-card, .list-item');
-  cards.forEach(card => {
-    card.style.cursor = 'pointer';
-    card.addEventListener('click', function() {
-      window.location.href = '05-schedule-detail.html';
-    });
+  // Make shift cards and list items clickable (but not all cards, to allow specific onclick handlers)
+  const shiftCards = document.querySelectorAll('.shift-card, .list-item');
+  shiftCards.forEach(card => {
+    // Only add click if it doesn't already have onclick attribute
+    if (!card.hasAttribute('onclick')) {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function() {
+        window.location.href = '05-schedule-detail.html';
+      });
+    }
   });
 });
